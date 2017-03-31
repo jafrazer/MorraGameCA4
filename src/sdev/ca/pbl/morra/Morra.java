@@ -3,13 +3,13 @@ package sdev.ca.pbl.morra;
 import java.util.Scanner;
 
 /**
- * 
- * 
- * 
+ * TODO: JavaDoc
  */
 public class Morra {
 
   /**
+   * TODO: JavaDoc
+   * 
    * @param args
    * 
    * @author johnfrazer - x16138015
@@ -17,13 +17,14 @@ public class Morra {
   public static void main(String[] args) {
 
     Scanner keyboardIn = new Scanner(System.in);
-
-    boolean odds = playerTypeSelectionMenu(keyboardIn);
+    boolean playerIsOdds = playerTypeSelectionMenu(keyboardIn);
 
     keyboardIn.close();
   }
 
   /**
+   * TODO: JavaDoc
+   * 
    * @param
    * 
    * @author johnfrazer - x16138015
