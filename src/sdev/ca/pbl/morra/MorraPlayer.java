@@ -4,8 +4,9 @@ package sdev.ca.pbl.morra;
  * @author johnfrazer - x16138015
  */
 public class MorraPlayer {
-  int fingers = 0;
-  int playerScore = 0;
+  private boolean isOdds = true;
+  private int fingers = 0;
+  private int playerScore = 0;
 
   /**
    * TODO: JavaDoc
@@ -51,7 +52,36 @@ public class MorraPlayer {
     playerScore += newPointsScored;
   }
 
+  /**
+   * TODO: JavaDoc
+   * 
+   * @param
+   * 
+   * @author johnfrazer - x16138015
+   */
   public int checkScore() {
     return this.fingers;
+  }
+
+  /**
+   * TODO: JavaDoc
+   * 
+   * @param
+   * 
+   * @author johnfrazer - x16138015
+   */
+  public void setAsOdds() {
+    this.isOdds = true;
+  }
+
+  /**
+   * TODO: JavaDoc
+   * 
+   * @param
+   * 
+   * @author johnfrazer - x16138015
+   */
+  public void setAsEvens() {
+    this.isOdds = false;
   }
 }

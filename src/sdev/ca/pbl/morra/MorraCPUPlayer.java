@@ -25,8 +25,7 @@ public class MorraCPUPlayer extends MorraPlayer {
    * 
    * @author johnfrazer - x16138015
    */
-  @Override
-  public int getFingers() {
-    return ThreadLocalRandom.current().nextInt(1, 10 + 1);
+  public void setFingers() {
+    super.setFingers(ThreadLocalRandom.current().nextInt(1, 10 + 1));
   }
 }
