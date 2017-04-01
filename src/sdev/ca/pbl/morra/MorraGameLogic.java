@@ -3,19 +3,7 @@ package sdev.ca.pbl.morra;
 import java.util.Scanner;
 
 /**
- * “Morra” is a hand game that has many variations and can be played by two or
- * more players.
- * 
- * In this variation of the game, one player is going to be the “Odds” player
- * and the other player “Evens”. In each round of the game, the players will
- * simultaneously "hold out" between 1 and 10 fingers. The winner of the round
- * is decided based on the sum of ﬁngers shown by both players. If the sum is an
- * even number, then the “Evens” player wins; otherwise, if the sum is an odd
- * number, then the “Odds” player wins. The winner of the round receives two
- * points.
- * 
- * In addition, the player whose number of fingers is closer to the sum,
- * receives one extra point.
+ * This class contains the game logic for Morra.
  */
 public class MorraGameLogic {
 
