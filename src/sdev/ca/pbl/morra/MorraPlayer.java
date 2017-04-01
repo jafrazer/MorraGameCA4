@@ -1,6 +1,8 @@
 package sdev.ca.pbl.morra;
 
 /**
+ * This is the default Morra Player class.
+ * 
  * @author johnfrazer - x16138015
  */
 public class MorraPlayer {
@@ -9,20 +11,18 @@ public class MorraPlayer {
   private int score = 0;
 
   /**
-   * TODO: JavaDoc
-   * 
-   * @param
+   * Default constructor for MorraPlayer.
    * 
    * @author johnfrazer - x16138015
    */
   public MorraPlayer() {
-    // TODO Auto-generated constructor stub
+    // This constructor is intentionally empty.
   }
 
   /**
-   * TODO: JavaDoc
+   * Read the player's number of "held out" fingers.
    * 
-   * @param
+   * @return
    * 
    * @author johnfrazer - x16138015
    */
@@ -31,9 +31,10 @@ public class MorraPlayer {
   }
 
   /**
-   * TODO: JavaDoc
+   * Sets the player's number of "held out" fingers.
    * 
-   * @param
+   * @param fingers
+   *          The number of fingers the player has chosen to "hold out".
    * 
    * @author johnfrazer - x16138015
    */
@@ -42,31 +43,27 @@ public class MorraPlayer {
   }
 
   /**
-   * TODO: JavaDoc
-   * 
-   * @param
+   * Increment the player's score by two points.
    * 
    * @author johnfrazer - x16138015
    */
   public void roundWinnerPointsUpdate() {
-    score += 2;
+    this.score += 2;
   }
 
   /**
-   * TODO: JavaDoc
-   * 
-   * @param
+   * Increments the player's score by one point.
    * 
    * @author johnfrazer - x16138015
    */
   public void closerToTheSumBonusPointUpdate() {
-    score += 1;
+    this.score++;
   }
 
   /**
-   * TODO: JavaDoc
+   * Read the player's current score.
    * 
-   * @param
+   * @return The player's current score.
    * 
    * @author johnfrazer - x16138015
    */
@@ -75,9 +72,7 @@ public class MorraPlayer {
   }
 
   /**
-   * TODO: JavaDoc
-   * 
-   * @param
+   * Reset the player's score to zero.
    * 
    * @author johnfrazer - x16138015
    */
@@ -86,9 +81,7 @@ public class MorraPlayer {
   }
 
   /**
-   * TODO: JavaDoc
-   * 
-   * @param
+   * Set the player as the "Odds" player.
    * 
    * @author johnfrazer - x16138015
    */
@@ -97,9 +90,8 @@ public class MorraPlayer {
   }
 
   /**
-   * TODO: JavaDoc
-   * 
-   * @param
+   * Set the player as the "Evens" player (or more specifically, set them as not
+   * "Odds").
    * 
    * @author johnfrazer - x16138015
    */
@@ -108,9 +100,9 @@ public class MorraPlayer {
   }
 
   /**
-   * TODO: JavaDoc
+   * Reads in the player is "Odds" or "Evens" ("Evens" is noted as not "Odds").
    * 
-   * @param
+   * @return If the player is odds or not.
    * 
    * @author johnfrazer - x16138015
    */
