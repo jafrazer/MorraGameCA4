@@ -21,48 +21,54 @@ public class Morra {
     MorraPlayer player = new MorraPlayer();
     MorraCPUPlayer cpu = new MorraCPUPlayer();
 
-    // Prompt user if they wish to be Odds or Evens
-    boolean playerSelectedOdds = humanPlayerTypeSelectionMenu(keyboardIn);
+    boolean playAgain = true;
 
-    // Set the player and cpu types based on the user selection
-    setPlayerTypes(player, cpu, playerSelectedOdds);
+    do {
+      // Prompt user if they wish to be Odds or Evens
+      boolean playerSelectedOdds = humanPlayerTypeSelectionMenu(keyboardIn);
 
-    /* START GAME ROUND */
+      // Set the player and cpu types based on the user selection
+      setPlayerTypes(player, cpu, playerSelectedOdds);
 
-    // User selection of number of fingers (1 and 10)
-    player.setFingers(getPlayerFingerCount(keyboardIn));
+      /* START ROUND */
 
-    // Computer selection of number of fingers (1 and 10)
-    cpu.setFingers();
+      // User selection of number of fingers (1 and 10)
+      player.setFingers(getPlayerFingerCount(keyboardIn));
 
-    // Displays the computer’s choice
+      // Computer selection of number of fingers (1 and 10)
+      cpu.setFingers();
 
-    // Score calculation
-    /*
-     * The winner of the round is decided based on the sum of ﬁngers shown by
-     * both players, namely if the sum is an even number then the “Evens” player
-     * wins, otherwise if the sum is an odd number then the “Odds” player wins.
-     * The winner of the round receives two points.
-     * 
-     * In addition, the player whose number of fingers is closer to the sum,
-     * receives one extra point.
-     */
+      // Displays the computer’s choice
+      System.out.println("CPU Fingers: " + cpu.getFingers());
 
-    // Display round winner
+      // Score calculation
+      /*
+       * The winner of the round is decided based on the sum of ﬁngers shown by
+       * both players, namely if the sum is an even number then the “Evens”
+       * player wins, otherwise if the sum is an odd number then the “Odds”
+       * player wins. The winner of the round receives two points.
+       * 
+       * In addition, the player whose number of fingers is closer to the sum,
+       * receives one extra point.
+       */
 
-    // Display the current score
+      // Display round winner
 
-    /* END GAME ROUND */
+      // Display the current score
 
-    // The winner of the game is the ﬁrst player who accumulates six points.
+      /* END ROUND */
 
-    // A game ﬁnishes when one of the players accumulates 6 points.
-    // At the end of a game, the game displays who the winner is, and a history
-    // of the numbers of ﬁngers shown by both the user and the computer per
-    // round.
+      // The winner of the game is the ﬁrst player who accumulates six points.
 
-    // Once a game has ﬁnished the application asks the player if he/she would
-    // like to play another game.
+      // A game ﬁnishes when one of the players accumulates 6 points.
+      // At the end of a game, the game displays who the winner is, and a
+      // history of the numbers of ﬁngers shown by both the user and the
+      // computer per round.
+
+      // ask the player if they would like to play another game.
+      playAgain = playAnotherGame(keyboardIn);
+
+    } while (playAgain);
 
     // At the end of all games, display a history of games played.
 
@@ -73,6 +79,34 @@ public class Morra {
     // All the history elements of the game should be coded using Arrays.
 
     keyboardIn.close();
+  }
+
+  /**
+   * TODO: JavaDoc
+   * 
+   * @param
+   * 
+   * @author johnfrazer - x16138015
+   */
+  private static boolean playAnotherGame(Scanner keyboardIn) {
+    boolean playAgain = false;
+    boolean playAgainLoopCondition = false;
+    do {
+      System.out.println("Would you like to play again? Y/N");
+      String playAgainStr = keyboardIn.nextLine();
+
+      if (playAgainStr.equalsIgnoreCase("Y")) {
+        playAgain = true;
+        playAgainLoopCondition = true;
+
+      } else if (playAgainStr.equalsIgnoreCase("N")) {
+        playAgain = false;
+        playAgainLoopCondition = true;
+
+      }
+    } while (!playAgainLoopCondition);
+
+    return playAgain;
   }
 
   /**
