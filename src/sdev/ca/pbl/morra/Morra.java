@@ -25,14 +25,14 @@ public class Morra {
    * @author johnfrazer - x16138015
    */
   public static void main(String[] args) {
+    // Instantiate Scanner to accept user input.
+    Scanner keyboardIn = new Scanner(System.in);
+
     // Instantiate the MorraGameLogic object.
     MorraGameLogic morraLogic = new MorraGameLogic();
 
-    // Instantiate Scanner to accept input.
-    Scanner keyboardIn = new Scanner(System.in);
-
     // Instantiate the player objects.
-    MorraPlayer player = new MorraPlayer();
+    MorraPlayer human = new MorraPlayer();
     MorraCPUPlayer cpu = new MorraCPUPlayer();
 
     // Initialise loop condition for PLAY GAME loop.
@@ -41,41 +41,41 @@ public class Morra {
     /* PLAY GAME */
     do {
       // Prompt user if they wish to be Odds or Evens.
-      boolean playerSelectedOdds = morraLogic.humanPlayerTypeSelectionMenu(keyboardIn);
+      boolean humanSelectedOdds = morraLogic.humanPlayerTypeSelectionMenu(keyboardIn);
 
       // Set the player and cpu types based on the user selection.
-      morraLogic.setPlayerTypes(player, cpu, playerSelectedOdds);
+      morraLogic.setPlayerTypes(human, cpu, humanSelectedOdds);
 
       /* START ROUND */
       do {
-        // User selection of number of fingers (1 and 10).
-        player.setFingers(morraLogic.getPlayerFingerCount(keyboardIn));
+        // User selection of number of fingers (1-10).
+        human.setFingers(morraLogic.getPlayerFingersHeldOut(keyboardIn));
 
-        // Computer selection of number of fingers (1 and 10).
+        // Computer selection of number of fingers (pseudo-random, 1-10).
         cpu.setFingers();
 
         // Displays the computer’s choice.
         System.out.println("CPU Fingers: " + cpu.getFingers());
 
         // Score calculation and display round winner.
-        morraLogic.calculateScoreChanges(player, cpu);
+        morraLogic.calculateScoreChanges(human, cpu);
 
         // Display the current score.
         System.out
-            .println("Current Score is: \n\tPlayer: " + player.checkScore() + " \n\tCPU: " + cpu.checkScore() + "\n");
+            .println("Current Score is: \n\tPlayer: " + human.checkScore() + " \n\tCPU: " + cpu.checkScore() + "\n");
 
         /* END ROUND */
-      } while (player.checkScore() < 6 && cpu.checkScore() < 6);
+      } while (human.checkScore() < 6 && cpu.checkScore() < 6);
 
       // At the end of the game, display the winner.
-      morraLogic.displayGameWinner(player.checkScore(), cpu.checkScore());
+      morraLogic.displayGameWinner(human.checkScore(), cpu.checkScore());
 
       // Also display the round history.
       morraLogic.displayRoundHistory();
 
       /* END GAME */
       // reset the player and cpu scores to zero for new game rounds.
-      player.resetScore();
+      human.resetScore();
       cpu.resetScore();
 
       // ask the player if they would like to play another game.
@@ -85,6 +85,7 @@ public class Morra {
     // At the end of all games, display a history of games played.
     morraLogic.displayFullGameHistory();
 
+    // Close the scanner object.
     keyboardIn.close();
   }
 

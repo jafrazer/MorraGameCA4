@@ -32,9 +32,9 @@ public class MorraGameLogic {
 
     do {
       System.out.println("Select if you are: \n\t1. Odds \n\t2. Evens");
-      int playerSelection = keyboardIn.nextInt();
+      int playerTypeChoice = keyboardIn.nextInt();
 
-      switch (playerSelection) {
+      switch (playerTypeChoice) {
       case 1:
         // Player has selected Odds
         selectedOdds = true;
@@ -62,7 +62,7 @@ public class MorraGameLogic {
    * In this method, the player and cpu users are set as Odds or Evens, based on
    * the player's selection.
    * 
-   * @param player
+   * @param human
    *          The human player object.
    * @param cpu
    *          The CPU player object.
@@ -72,16 +72,16 @@ public class MorraGameLogic {
    * 
    * @author johnfrazer - x16138015
    */
-  public void setPlayerTypes(MorraPlayer player, MorraCPUPlayer cpu, boolean playerSelectedOdds) {
+  public void setPlayerTypes(MorraPlayer human, MorraCPUPlayer cpu, boolean playerSelectedOdds) {
     if (playerSelectedOdds) {
       // if the player has selected odds, set the player as odds, and the cpu as
       // evens.
-      player.setAsOdds();
+      human.setAsOdds();
       cpu.setAsEvens();
     } else {
       // if the player has NOT selected odds, set the player as evens, and the
       // cpu as odds.
-      player.setAsEvens();
+      human.setAsEvens();
       cpu.setAsOdds();
     }
   }
@@ -96,11 +96,11 @@ public class MorraGameLogic {
    * 
    * @author johnfrazer - x16138015
    */
-  public int getPlayerFingerCount(Scanner keyboardIn) {
+  public int getPlayerFingersHeldOut(Scanner keyboardIn) {
     int playerFingers = 0;
 
     do {
-      System.out.println("Enter your Morra Fingers Guess: ");
+      System.out.print("Enter your Morra Fingers Guess (1-10): ");
       playerFingers = keyboardIn.nextInt();
     } while (playerFingers < 0 || playerFingers > 10);
 
@@ -108,7 +108,8 @@ public class MorraGameLogic {
   }
 
   /**
-   * This method calculates updates to the players scores in a game round.
+   * This method calculates updates to the players scores in a game round,
+   * displays which player has won, and some information on why.
    * 
    * The winner of the round is decided based on the sum of ﬁngers shown by both
    * players, namely if the sum is an even number then the “Evens” player wins,
@@ -118,45 +119,50 @@ public class MorraGameLogic {
    * In addition, the player whose number of fingers is closer to the sum,
    * receives one extra point.
    * 
-   * @param player
+   * @param human
    *          The human player object.
    * @param cpu
    *          The CPU player object.
    * 
    * @author johnfrazer - x16138015
    */
-  public void calculateScoreChanges(MorraPlayer player, MorraCPUPlayer cpu) {
-    int fingersShownTotal = player.getFingers() + cpu.getFingers();
+  public void calculateScoreChanges(MorraPlayer human, MorraCPUPlayer cpu) {
 
-    if (fingersShownTotal % 2 == 0) {
+    // Calculate who wins the points for being Odds or Evens.
+    int totalFingersShown = human.getFingers() + cpu.getFingers();
+
+    if (totalFingersShown % 2 == 0) {
       // result is EVEN; evens player wins
-      if (!player.isPlayerOdds()) {
-        player.roundWinnerPointsUpdate();
-        System.out.println("You win this round!");
+      if (!human.isPlayerOdds()) {
+        human.roundWinnerPointsUpdate();
+        System.out.println("You win this round! (" + totalFingersShown + " is even)");
       } else if (!cpu.isPlayerOdds()) {
         cpu.roundWinnerPointsUpdate();
-        System.out.println("CPU win this round!");
+        System.out.println("CPU wins this round! (" + totalFingersShown + " is even)");
       }
-    } else if (fingersShownTotal % 2 == 1) {
+    } else if (totalFingersShown % 2 == 1) {
       // result is ODD; odds player wins
-      if (player.isPlayerOdds()) {
-        player.roundWinnerPointsUpdate();
-        System.out.println("You win this round!");
+      if (human.isPlayerOdds()) {
+        human.roundWinnerPointsUpdate();
+        System.out.println("You win this round! (" + totalFingersShown + " is odd)");
       } else if (cpu.isPlayerOdds()) {
         cpu.roundWinnerPointsUpdate();
-        System.out.println("CPU win this round!");
+        System.out.println("CPU wins this round! (" + totalFingersShown + " is odd)");
       }
     }
 
-    int playerFingersTotalDiff = player.getFingers() - fingersShownTotal;
-    int cpuFingersTotalDiff = cpu.getFingers() - fingersShownTotal;
+    // Calculate who wins the bonus point for being closer to the total.
+    int playerFingersTotalDiff = totalFingersShown - human.getFingers();
+    int cpuFingersTotalDiff = totalFingersShown - cpu.getFingers();
 
     if (playerFingersTotalDiff < cpuFingersTotalDiff) {
-      player.closerToTheSumBonusPointUpdate();
-      System.out.println("Your guess was closer to the total, so you win the bonus point!");
+      human.closerToTheSumBonusPointUpdate();
+      System.out.println("Your guess (" + human.getFingers() + ") was closer to the total (" + totalFingersShown
+          + ") than CPU's guess (" + cpu.getFingers() + "), so you win the bonus point!");
     } else {
       cpu.closerToTheSumBonusPointUpdate();
-      System.out.println("CPU guess was closer to the total, so CPU wins the bonus point!");
+      System.out.println("CPU guess (" + cpu.getFingers() + ") was closer to the total (" + totalFingersShown
+          + ") than your guess (" + human.getFingers() + "), so CPU wins the bonus point!");
     }
   }
 
@@ -164,22 +170,22 @@ public class MorraGameLogic {
    * This method compares the player's score to the cpu player's score, and
    * displays the game winner.
    * 
-   * @param playerScore
+   * @param humanScore
    * @param cpuScore
    * 
    * @author johnfrazer - x16138015
    */
-  public void displayGameWinner(int playerScore, int cpuScore) {
+  public void displayGameWinner(int humanScore, int cpuScore) {
     // The winner of the game is the ﬁrst player who accumulates six points.
-    if (playerScore > cpuScore) {
+    if (humanScore > cpuScore) {
       // player wins
-      System.out.println("Player wins");
-    } else if (playerScore < cpuScore) {
+      System.out.println("Player wins!!!\n");
+    } else if (humanScore < cpuScore) {
       // cpu wins
-      System.out.println("CPU wins!");
+      System.out.println("CPU wins!!!\n");
     } else {
       // tie game
-      System.out.println("Game tied!");
+      System.out.println("Game tied.");
     }
   }
 
@@ -212,7 +218,7 @@ public class MorraGameLogic {
     boolean playAgainLoopCondition = false;
 
     do {
-      System.out.println("Would you like to play again? Y/N");
+      System.out.print("Would you like to play again? \nY/N: ");
       String playAgainStr = keyboardIn.next();
 
       if (playAgainStr.equalsIgnoreCase("Y")) {
@@ -224,6 +230,7 @@ public class MorraGameLogic {
         playAgainLoopCondition = true;
 
       }
+      System.out.println(""); // extra line for console formatting
     } while (!playAgainLoopCondition);
 
     return playAgain;
