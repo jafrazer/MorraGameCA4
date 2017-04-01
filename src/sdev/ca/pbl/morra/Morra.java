@@ -15,14 +15,15 @@ public class Morra {
    * @author johnfrazer - x16138015
    */
   public static void main(String[] args) {
-
     Scanner keyboardIn = new Scanner(System.in);
 
     MorraPlayer player = new MorraPlayer();
     MorraCPUPlayer cpu = new MorraCPUPlayer();
 
+    // Initialise loop condition for PLAY GAME loop
     boolean playAgain = true;
 
+    /* PLAY GAME */
     do {
       // Prompt user if they wish to be Odds or Evens
       boolean playerSelectedOdds = humanPlayerTypeSelectionMenu(keyboardIn);
@@ -31,43 +32,43 @@ public class Morra {
       setPlayerTypes(player, cpu, playerSelectedOdds);
 
       /* START ROUND */
+      do {
+        // User selection of number of fingers (1 and 10)
+        int playerFingers = getPlayerFingerCount(keyboardIn);
+        player.setFingers(playerFingers);
 
-      // User selection of number of fingers (1 and 10)
-      player.setFingers(getPlayerFingerCount(keyboardIn));
+        // Computer selection of number of fingers (1 and 10)
+        cpu.setFingers();
 
-      // Computer selection of number of fingers (1 and 10)
-      cpu.setFingers();
+        // Displays the computer’s choice
+        System.out.println("CPU Fingers: " + cpu.getFingers());
 
-      // Displays the computer’s choice
-      System.out.println("CPU Fingers: " + cpu.getFingers());
+        // Score calculation and display round winner
+        calculateScoreChanges(player, cpu);
 
-      // Score calculation
-      /*
-       * The winner of the round is decided based on the sum of ﬁngers shown by
-       * both players, namely if the sum is an even number then the “Evens”
-       * player wins, otherwise if the sum is an odd number then the “Odds”
-       * player wins. The winner of the round receives two points.
-       * 
-       * In addition, the player whose number of fingers is closer to the sum,
-       * receives one extra point.
-       */
+        // Display the current score
+        System.out
+            .println("Current Score is: \n\tPlayer: " + player.checkScore() + " \n\tCPU: " + cpu.checkScore() + "\n");
 
-      // Display round winner
+        /* END ROUND */
+      } while (player.checkScore() < 6 && cpu.checkScore() < 6);
 
-      // Display the current score
+      displayGameWinner(player.checkScore(), cpu.checkScore());
 
-      /* END ROUND */
-
-      // The winner of the game is the ﬁrst player who accumulates six points.
+      // TODO: display round history
 
       // A game ﬁnishes when one of the players accumulates 6 points.
       // At the end of a game, the game displays who the winner is, and a
       // history of the numbers of ﬁngers shown by both the user and the
       // computer per round.
 
+      /* END GAME */
+      // reset the player and cpu scores to zero for new game rounds
+      player.resetScore();
+      cpu.resetScore();
+
       // ask the player if they would like to play another game.
       playAgain = playAnotherGame(keyboardIn);
-
     } while (playAgain);
 
     // At the end of all games, display a history of games played.
@@ -79,34 +80,6 @@ public class Morra {
     // All the history elements of the game should be coded using Arrays.
 
     keyboardIn.close();
-  }
-
-  /**
-   * TODO: JavaDoc
-   * 
-   * @param
-   * 
-   * @author johnfrazer - x16138015
-   */
-  private static boolean playAnotherGame(Scanner keyboardIn) {
-    boolean playAgain = false;
-    boolean playAgainLoopCondition = false;
-    do {
-      System.out.println("Would you like to play again? Y/N");
-      String playAgainStr = keyboardIn.nextLine();
-
-      if (playAgainStr.equalsIgnoreCase("Y")) {
-        playAgain = true;
-        playAgainLoopCondition = true;
-
-      } else if (playAgainStr.equalsIgnoreCase("N")) {
-        playAgain = false;
-        playAgainLoopCondition = true;
-
-      }
-    } while (!playAgainLoopCondition);
-
-    return playAgain;
   }
 
   /**
@@ -182,6 +155,106 @@ public class Morra {
     } while (playerFingers < 0 || playerFingers > 10);
 
     return playerFingers;
+  }
+
+  /**
+   * This method calculates updates to the players scores in a game round.
+   * 
+   * The winner of the round is decided based on the sum of ﬁngers shown by both
+   * players, namely if the sum is an even number then the “Evens” player wins,
+   * otherwise if the sum is an odd number then the “Odds” player wins. The
+   * winner of the round receives two points.
+   * 
+   * In addition, the player whose number of fingers is closer to the sum,
+   * receives one extra point.
+   * 
+   * @param
+   * 
+   * @author johnfrazer - x16138015
+   */
+  private static void calculateScoreChanges(MorraPlayer player, MorraCPUPlayer cpu) {
+    int fingersShownTotal = player.getFingers() + cpu.getFingers();
+
+    if (fingersShownTotal % 2 == 0) {
+      // result is EVEN; evens player wins
+      if (!player.isPlayerOdds()) {
+        player.roundWinnerPointsUpdate();
+        System.out.println("You win this round!");
+      } else if (!cpu.isPlayerOdds()) {
+        cpu.roundWinnerPointsUpdate();
+        System.out.println("CPU win this round!");
+      }
+    } else if (fingersShownTotal % 2 == 1) {
+      // result is ODD; odds player wins
+      if (player.isPlayerOdds()) {
+        player.roundWinnerPointsUpdate();
+        System.out.println("You win this round!");
+      } else if (cpu.isPlayerOdds()) {
+        cpu.roundWinnerPointsUpdate();
+        System.out.println("CPU win this round!");
+      }
+    }
+
+    int playerFingersTotalDiff = player.getFingers() - fingersShownTotal;
+    int cpuFingersTotalDiff = cpu.getFingers() - fingersShownTotal;
+
+    if (playerFingersTotalDiff < cpuFingersTotalDiff) {
+      player.closerToTheSumBonusPointUpdate();
+      System.out.println("Your guess was closer to the total, so you win the bonus point!");
+    } else {
+      cpu.closerToTheSumBonusPointUpdate();
+      System.out.println("CPU guess was closer to the total, so CPU wins the bonus point!");
+    }
+  }
+
+  /**
+   * TODO: JavaDoc
+   * 
+   * @param
+   * 
+   * @author johnfrazer - x16138015
+   */
+  private static void displayGameWinner(int playerScore, int cpuScore) {
+    // The winner of the game is the ﬁrst player who accumulates six points.
+    if (playerScore > cpuScore) {
+      // player wins
+      System.out.println("Player wins");
+    } else if (playerScore < cpuScore) {
+      // cpu wins
+      System.out.println("CPU wins!");
+    } else {
+      // tie game
+      System.out.println("Game tied!");
+    }
+  }
+
+  /**
+   * TODO: JavaDoc
+   * 
+   * @param
+   * 
+   * @author johnfrazer - x16138015
+   */
+  private static boolean playAnotherGame(Scanner keyboardIn) {
+    boolean playAgain = false;
+    boolean playAgainLoopCondition = false;
+
+    do {
+      System.out.println("Would you like to play again? Y/N");
+      String playAgainStr = keyboardIn.next();
+
+      if (playAgainStr.equalsIgnoreCase("Y")) {
+        playAgain = true;
+        playAgainLoopCondition = true;
+
+      } else if (playAgainStr.equalsIgnoreCase("N")) {
+        playAgain = false;
+        playAgainLoopCondition = true;
+
+      }
+    } while (!playAgainLoopCondition);
+
+    return playAgain;
   }
 
 }

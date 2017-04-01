@@ -6,7 +6,7 @@ package sdev.ca.pbl.morra;
 public class MorraPlayer {
   private boolean isOdds = true;
   private int fingers = 0;
-  private int playerScore = 0;
+  private int score = 0;
 
   /**
    * TODO: JavaDoc
@@ -48,8 +48,19 @@ public class MorraPlayer {
    * 
    * @author johnfrazer - x16138015
    */
-  public void updateScore(int newPointsScored) {
-    playerScore += newPointsScored;
+  public void roundWinnerPointsUpdate() {
+    score += 2;
+  }
+
+  /**
+   * TODO: JavaDoc
+   * 
+   * @param
+   * 
+   * @author johnfrazer - x16138015
+   */
+  public void closerToTheSumBonusPointUpdate() {
+    score += 1;
   }
 
   /**
@@ -60,7 +71,18 @@ public class MorraPlayer {
    * @author johnfrazer - x16138015
    */
   public int checkScore() {
-    return this.fingers;
+    return this.score;
+  }
+
+  /**
+   * TODO: JavaDoc
+   * 
+   * @param
+   * 
+   * @author johnfrazer - x16138015
+   */
+  public void resetScore() {
+    this.score = 0;
   }
 
   /**
@@ -83,5 +105,16 @@ public class MorraPlayer {
    */
   public void setAsEvens() {
     this.isOdds = false;
+  }
+
+  /**
+   * TODO: JavaDoc
+   * 
+   * @param
+   * 
+   * @author johnfrazer - x16138015
+   */
+  public boolean isPlayerOdds() {
+    return this.isOdds;
   }
 }
