@@ -9,6 +9,8 @@ public class MorraPlayer {
   private boolean isOdds = true;
   private int fingers = 0;
   private int score = 0;
+  private int[] fingerHistory = new int[10];
+  private int roundsWon = 0;
 
   /**
    * Default constructor for MorraPlayer.
@@ -108,5 +110,53 @@ public class MorraPlayer {
    */
   public boolean isPlayerOdds() {
     return this.isOdds;
+  }
+
+  /**
+   * TODO: javadoc
+   * 
+   * @return
+   * 
+   * @author johnfrazer - x16138015
+   */
+  public void updateFingerHistory(int roundNumber) {
+    fingerHistory[roundNumber] = getFingers();
+  }
+
+  /**
+   * TODO: javadoc
+   * 
+   * @return
+   * 
+   * @author johnfrazer - x16138015
+   */
+  public void printFingerHistory() {
+    for (int fingers : this.fingerHistory) {
+      if (fingers != 0) {
+        System.out.print(fingers + ", ");
+      }
+    }
+  }
+
+  /**
+   * TODO: javadoc
+   * 
+   * @return
+   * 
+   * @author johnfrazer - x16138015
+   */
+  public void wonRound() {
+    this.roundsWon++;
+  }
+
+  /**
+   * TODO: javadoc
+   * 
+   * @return
+   * 
+   * @author johnfrazer - x16138015
+   */
+  public int getRoundsWonCount() {
+    return this.roundsWon;
   }
 }

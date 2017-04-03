@@ -167,6 +167,36 @@ public class MorraGameLogic {
   }
 
   /**
+   * Store the player "fingers held out" information into the player object.
+   * 
+   * @param human
+   *          The human player object.
+   * @param cpu
+   *          The CPU player object.
+   * @param roundNumber
+   *          The round number to update
+   */
+  public void updateRoundHistory(MorraPlayer human, MorraCPUPlayer cpu, int roundNumber) {
+    human.updateFingerHistory(roundNumber);
+    cpu.updateFingerHistory(roundNumber);
+  }
+
+  /**
+   * Output the game winner and game history.
+   * 
+   * @param human
+   *          The human player object.
+   * @param cpu
+   *          The CPU player object.
+   * 
+   * @author johnfrazer - x16138015
+   */
+  public void endRoundOutput(MorraPlayer human, MorraCPUPlayer cpu) {
+    displayGameWinner(human.checkScore(), cpu.checkScore());
+    displaySingleGameHistory(human, cpu);
+  }
+
+  /**
    * This method compares the player's score to the cpu player's score, and
    * displays the game winner.
    * 
@@ -175,36 +205,45 @@ public class MorraGameLogic {
    * 
    * @author johnfrazer - x16138015
    */
-  public void displayGameWinner(int humanScore, int cpuScore) {
+  private void displayGameWinner(int humanScore, int cpuScore) {
     // The winner of the game is the ﬁrst player who accumulates six points.
     if (humanScore > cpuScore) {
       // player wins
-      System.out.println("Player wins!!!\n");
+      System.out.println("Player wins " + humanScore + "-" + cpuScore + "!!!");
     } else if (humanScore < cpuScore) {
       // cpu wins
-      System.out.println("CPU wins!!!\n");
+      System.out.println("CPU wins " + cpuScore + "-" + humanScore + "!!!");
     } else {
       // tie game
-      System.out.println("Game tied.");
+      System.out.println("Game tied, " + humanScore + "-" + cpuScore + ".");
     }
   }
 
   /**
-   * TODO: JavaDoc
+   * Display the numbers of ﬁngers shown by both the user and the computer per
+   * round.
+   * 
+   * @param human
+   *          The human player object.
+   * @param cpu
+   *          The CPU player object.
    * 
    * @author johnfrazer - x16138015
    */
-  public void displayRoundHistory() {
-    // A game ﬁnishes when one of the players accumulates 6 points.
-    // At the end of a game, the game displays who the winner is, and a
-    // history of the numbers of ﬁngers shown by both the user and the
-    // computer per round.
+  private void displaySingleGameHistory(MorraPlayer human, MorraCPUPlayer cpu) {
 
-    // TODO
+    System.out.print("Player fingers: ");
+    human.printFingerHistory();
+    System.out.println(""); // extra line for console formatting
+
+    System.out.print("CPU fingers: ");
+    cpu.printFingerHistory();
+    System.out.println(""); // extra line for console formatting
+
   }
 
   /**
-   * This method asks the user if they would like to play another game.
+   * Ask the user if they would like to play another game.
    * 
    * @param keyboardIn
    *          The scanner object for accepting user input.
@@ -218,7 +257,7 @@ public class MorraGameLogic {
     boolean playAgainLoopCondition = false;
 
     do {
-      System.out.print("Would you like to play again? \nY/N: ");
+      System.out.print("\nWould you like to play again? Y/N: ");
       String playAgainStr = keyboardIn.next();
 
       if (playAgainStr.equalsIgnoreCase("Y")) {
@@ -237,18 +276,20 @@ public class MorraGameLogic {
   }
 
   /**
-   * TODO: JavaDoc
+   * For each game, show:
+   * 
+   * - the number of rounds won and lost by the human player
+   * 
+   * - how many even and odd numbers have been chosen by each player
+   * 
+   * - the extra points received by the player per game
+   * 
    * 
    * @author johnfrazer - x16138015
    */
-  public void displayFullGameHistory() {
-
-    // The history shows for each game the number of rounds won and lost by the
-    // human player, and how many even and odd numbers have been chosen by each
-    // player, and the extra points received by the player per game.
+  public void displayGameEndStats() {
 
     // All the history elements of the game should be coded using Arrays.
-
     // TODO
   }
 

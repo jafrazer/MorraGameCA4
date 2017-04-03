@@ -25,7 +25,7 @@ public class Morra {
    * @author johnfrazer - x16138015
    */
   public static void main(String[] args) {
-    // Instantiate Scanner to accept user input.
+    // Instantiate Scanner object to accept user input.
     Scanner keyboardIn = new Scanner(System.in);
 
     // Instantiate the MorraGameLogic object.
@@ -46,6 +46,8 @@ public class Morra {
       // Set the player and cpu types based on the user selection.
       morraLogic.setPlayerTypes(human, cpu, humanSelectedOdds);
 
+      int roundCounter = 0;
+
       do {
         /* START ROUND */
         // User selection of number of fingers (1-10).
@@ -64,14 +66,18 @@ public class Morra {
         System.out
             .println("Current Score is: \n\tPlayer: " + human.checkScore() + " \n\tCPU: " + cpu.checkScore() + "\n");
 
+        // Store the fingers data for the round
+        morraLogic.updateRoundHistory(human, cpu, roundCounter);
+
+        // increment the round counter so that we can correctly store the player
+        // fingers held out info.
+        roundCounter++;
+
         /* END ROUND */
       } while (human.checkScore() < 6 && cpu.checkScore() < 6);
 
-      // At the end of the game, display the winner.
-      morraLogic.displayGameWinner(human.checkScore(), cpu.checkScore());
-
-      // Also display the round history.
-      morraLogic.displayRoundHistory();
+      // At the end of the game, display the winner and the round history.
+      morraLogic.endRoundOutput(human, cpu);
 
       /* END GAME */
       // reset the player and cpu scores to zero for new game rounds.
@@ -83,7 +89,7 @@ public class Morra {
     } while (playAgain);
 
     // At the end of all games, display a history of games played.
-    morraLogic.displayFullGameHistory();
+    morraLogic.displayGameEndStats();
 
     // Close the scanner object.
     keyboardIn.close();
