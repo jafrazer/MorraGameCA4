@@ -38,16 +38,16 @@ public class Morra {
     // Initialise loop condition for PLAY GAME loop.
     boolean playAgain = true;
 
-    /* PLAY GAME */
     do {
+      /* PLAY GAME */
       // Prompt user if they wish to be Odds or Evens.
       boolean humanSelectedOdds = morraLogic.humanPlayerTypeSelectionMenu(keyboardIn);
 
       // Set the player and cpu types based on the user selection.
       morraLogic.setPlayerTypes(human, cpu, humanSelectedOdds);
 
-      /* START ROUND */
       do {
+        /* START ROUND */
         // User selection of number of fingers (1-10).
         human.setFingers(morraLogic.getPlayerFingersHeldOut(keyboardIn));
 
