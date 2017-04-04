@@ -17,7 +17,7 @@ import java.util.Scanner;
  * In addition, the player whose number of fingers is closer to the sum,
  * receives one extra point.
  */
-public class Morra {
+public class MorraApp {
 
   /**
    * Main method for the Morra Game Application.
@@ -35,7 +35,8 @@ public class Morra {
     MorraPlayer human = new MorraPlayer();
     MorraCPUPlayer cpu = new MorraCPUPlayer();
 
-    // Initialise loop condition for PLAY GAME loop.
+    // Initialise loop condition for PLAY GAME loop; if the player wants to play
+    // another game.
     boolean playAgain = true;
 
     do {
@@ -70,7 +71,7 @@ public class Morra {
         morraLogic.updateRoundHistory(human, cpu, roundCounter);
 
         // increment the round counter so that we can correctly store the player
-        // fingers held out info.
+        // fingers held out array.
         roundCounter++;
 
         /* END ROUND */

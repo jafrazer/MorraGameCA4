@@ -102,7 +102,7 @@ public class MorraGameLogic {
     do {
       System.out.print("Enter your Morra Fingers Guess (1-10): ");
       playerFingers = keyboardIn.nextInt();
-    } while (playerFingers < 0 || playerFingers > 10);
+    } while (playerFingers < 0 || playerFingers > 11);
 
     return playerFingers;
   }
@@ -257,8 +257,10 @@ public class MorraGameLogic {
     boolean playAgainLoopCondition = false;
 
     do {
-      System.out.print("\nWould you like to play again? Y/N: ");
+      System.out.print("Would you like to play again? Y/N: ");
       String playAgainStr = keyboardIn.next();
+
+      System.out.println(""); // extra line for console formatting
 
       if (playAgainStr.equalsIgnoreCase("Y")) {
         playAgain = true;
