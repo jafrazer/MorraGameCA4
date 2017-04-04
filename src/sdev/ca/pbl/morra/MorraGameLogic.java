@@ -104,6 +104,36 @@ public class MorraGameLogic {
       playerFingers = keyboardIn.nextInt();
     } while (playerFingers < 0 || playerFingers > 11);
 
+    // First attempt at non-number error handling.
+    // do {
+    // boolean isNumeric = true;
+    // do {
+    // System.out.print("Enter your Morra Fingers Guess (1-10): ");
+    // try {
+    // playerFingers = keyboardIn.nextInt();
+    // } catch (InputMismatchException ime) {
+    // ime.printStackTrace();
+    // isNumeric = false;
+    // }
+    // } while (!isNumeric);
+    // } while (playerFingers < 0 || playerFingers > 11);
+
+    // Second attempt at non-number error handling.
+    // String playerFingersStr = new String();
+    // do {
+    // boolean isNumeric = true;
+    // do {
+    // System.out.print("Enter your Morra Fingers Guess (1-10): ");
+    // playerFingersStr = keyboardIn.next();
+    // try {
+    // playerFingers = Integer.parseInt(playerFingersStr);
+    // } catch (NumberFormatException nfe) {
+    // nfe.printStackTrace();
+    // isNumeric = false;
+    // }
+    // } while (!isNumeric);
+    // } while (playerFingers < 0 || playerFingers > 11);
+
     return playerFingers;
   }
 
