@@ -113,9 +113,11 @@ public class MorraPlayer {
   }
 
   /**
-   * TODO: javadoc
+   * Add the current player fingers value to the round fingers history array.
    * 
-   * @return
+   * @param roundNumber
+   *          The current game round (as this is used for an array, counting
+   *          should start at 0)
    * 
    * @author johnfrazer - x16138015
    */
@@ -124,9 +126,7 @@ public class MorraPlayer {
   }
 
   /**
-   * TODO: javadoc
-   * 
-   * @return
+   * Print the players finger history out in the format: X, Y, Z, etc,
    * 
    * @author johnfrazer - x16138015
    */
@@ -139,9 +139,7 @@ public class MorraPlayer {
   }
 
   /**
-   * TODO: javadoc
-   * 
-   * @return
+   * Increase the player's number of rounds won counter.
    * 
    * @author johnfrazer - x16138015
    */
@@ -150,9 +148,9 @@ public class MorraPlayer {
   }
 
   /**
-   * TODO: javadoc
+   * Read the number of rounds the player has won.
    * 
-   * @return
+   * @return The current number of rounds the player has won in this game.
    * 
    * @author johnfrazer - x16138015
    */
