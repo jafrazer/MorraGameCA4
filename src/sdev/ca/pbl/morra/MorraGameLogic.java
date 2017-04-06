@@ -165,6 +165,7 @@ public class MorraGameLogic {
       // result is EVEN; evens player wins
       if (!human.isPlayerOdds()) {
         human.roundWinnerPointsUpdate();
+        human.updateWonRoundCount();
         System.out.println("You win this round! (" + totalFingersShown + " is even)");
       } else if (!cpu.isPlayerOdds()) {
         cpu.roundWinnerPointsUpdate();
@@ -175,6 +176,7 @@ public class MorraGameLogic {
       // result is ODD; odds player wins
       if (human.isPlayerOdds()) {
         human.roundWinnerPointsUpdate();
+        human.updateWonRoundCount();
         System.out.println("You win this round! (" + totalFingersShown + " is odd)");
       } else if (cpu.isPlayerOdds()) {
         cpu.roundWinnerPointsUpdate();

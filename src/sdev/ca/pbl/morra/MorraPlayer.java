@@ -67,7 +67,6 @@ public class MorraPlayer {
    */
   public void roundWinnerPointsUpdate() {
     this.score += 2;
-    this.updateWonRoundCount();
   }
 
   /**
@@ -219,45 +218,25 @@ public class MorraPlayer {
   }
 
   /**
-   * TODO
-   * 
-   * @author johnfrazer - x16138015
-   */
-  public void evenNumberShown() {
-    this.evensOddsCounters[evenConstant]++;
-  }
-
-  /**
-   * TODO
-   * 
-   * @author johnfrazer - x16138015
-   */
-  public void oddNumberShown() {
-    this.evensOddsCounters[oddConstant]++;
-  }
-
-  /**
-   * TODO
-   * 
-   * @return
+   * Increment the running total of times the player has played an even number
+   * of fingers.
    */
   public void updateEvenNumberCount() {
     this.evensOddsCounters[evenConstant]++;
   }
 
   /**
-   * TODO
+   * Read the number of times the player played an even number of fingers.
    * 
-   * @return
+   * @return Number of times a player played an even number of fingers
    */
   public int getEvenNumberCount() {
     return this.evensOddsCounters[evenConstant];
   }
 
   /**
-   * TODO
-   * 
-   * @return
+   * Increment the running total of times the player has played an odd number of
+   * fingers.
    * 
    * @author johnfrazer - x16138015
    */
@@ -266,9 +245,9 @@ public class MorraPlayer {
   }
 
   /**
-   * TODO
+   * Read the number of times the player played an odd number of fingers.
    * 
-   * @return
+   * @return Number of times a player played an odd number of fingers
    * 
    * @author johnfrazer - x16138015
    */
@@ -277,9 +256,9 @@ public class MorraPlayer {
   }
 
   /**
-   * TODO
+   * Read the total number of bonus points the player has won so far.
    * 
-   * @return
+   * @return Bonus points total
    * 
    * @author johnfrazer - x16138015
    */
