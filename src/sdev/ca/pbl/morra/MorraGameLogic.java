@@ -31,7 +31,7 @@ public class MorraGameLogic {
     boolean loopCondition = true;
 
     do {
-      System.out.println("Select if you are: \n\t1. Odds \n\t2. Evens");
+      System.out.print("Select if you are: \n\t1. Odds \n\t2. Evens\nChoose: ");
       int playerTypeChoice = keyboardIn.nextInt();
 
       switch (playerTypeChoice) {
@@ -230,8 +230,6 @@ public class MorraGameLogic {
     displayGameWinner(human.checkScore(), cpu.checkScore());
     displaySingleGameHistory(human, cpu);
 
-    // TODO: Save the finger history end game output
-
     // Reset the player fingers held out history
     human.resetFingerHistory();
     cpu.resetFingerHistory();
@@ -280,6 +278,7 @@ public class MorraGameLogic {
     System.out.print("CPU fingers: ");
     cpu.printFingerHistory();
     System.out.println(""); // extra line for console formatting
+    System.out.println(""); // extra line for console formatting
 
   }
 
@@ -312,7 +311,6 @@ public class MorraGameLogic {
         playAgainLoopCondition = true;
 
       }
-      System.out.println(""); // extra line for console formatting
     } while (!playAgainLoopCondition);
 
     return playAgain;
