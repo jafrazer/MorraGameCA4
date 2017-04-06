@@ -222,8 +222,15 @@ public class MorraGameLogic {
    * @author johnfrazer - x16138015
    */
   public void endRoundOutput(MorraPlayer human, MorraCPUPlayer cpu) {
+
     displayGameWinner(human.checkScore(), cpu.checkScore());
     displaySingleGameHistory(human, cpu);
+
+    // TODO: Save the finger history end game output
+
+    // Reset the player fingers held out history
+    human.resetFingerHistory();
+    cpu.resetFingerHistory();
   }
 
   /**
@@ -315,7 +322,6 @@ public class MorraGameLogic {
    * - how many even and odd numbers have been chosen by each player
    * 
    * - the extra points received by the player per game
-   * 
    * 
    * @author johnfrazer - x16138015
    */

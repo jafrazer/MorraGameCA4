@@ -9,7 +9,7 @@ public class MorraPlayer {
   private boolean isOdds = true;
   private int fingers = 0;
   private int score = 0;
-  private int[] fingerHistory = new int[10];
+  private int[] fingerHistory = new int[1];
   private int roundsWon = 0;
 
   /**
@@ -122,7 +122,19 @@ public class MorraPlayer {
    * @author johnfrazer - x16138015
    */
   public void updateFingerHistory(int roundNumber) {
-    fingerHistory[roundNumber] = getFingers();
+    // Create a new array to hold the fingers held out data.
+    int[] newFingerHistory = new int[roundNumber + 1];
+
+    // copy the existing data into the new (bigger) array.
+    for (int i = 0; i < this.fingerHistory.length; i++) {
+      newFingerHistory[i] = this.fingerHistory[i];
+    }
+
+    // add the current fingers held out record to the new history.
+    newFingerHistory[roundNumber] = getFingers();
+
+    // copy the new history to the class variable.
+    this.fingerHistory = newFingerHistory;
   }
 
   /**
@@ -132,10 +144,17 @@ public class MorraPlayer {
    */
   public void printFingerHistory() {
     for (int fingers : this.fingerHistory) {
-      if (fingers != 0) {
-        System.out.print(fingers + ", ");
-      }
+      System.out.print(fingers + ", ");
     }
+  }
+
+  /**
+   * Print the players finger history out in the format: X, Y, Z, etc,
+   * 
+   * @author johnfrazer - x16138015
+   */
+  public void resetFingerHistory() {
+    this.fingerHistory = new int[1];
   }
 
   /**
