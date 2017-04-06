@@ -317,13 +317,15 @@ public class MorraGameLogic {
   }
 
   /**
-   * For each game, show:
+   * For each game, show: <br>
+   * - the number of rounds won and lost by the human player <br>
+   * - how many even and odd numbers have been chosen by each player <br>
+   * - the extra points received by the player per game <br>
    * 
-   * - the number of rounds won and lost by the human player
-   * 
-   * - how many even and odd numbers have been chosen by each player
-   * 
-   * - the extra points received by the player per game
+   * @param human
+   *          The human player object.
+   * @param cpu
+   *          The CPU player object.
    * 
    * @author johnfrazer - x16138015
    */
