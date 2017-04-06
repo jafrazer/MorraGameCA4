@@ -220,6 +220,8 @@ public class MorraPlayer {
   /**
    * Increment the running total of times the player has played an even number
    * of fingers.
+   * 
+   * @author johnfrazer - x16138015
    */
   public void updateEvenNumberCount() {
     this.evensOddsCounters[evenConstant]++;
@@ -229,6 +231,8 @@ public class MorraPlayer {
    * Read the number of times the player played an even number of fingers.
    * 
    * @return Number of times a player played an even number of fingers
+   * 
+   * @author johnfrazer - x16138015
    */
   public int getEvenNumberCount() {
     return this.evensOddsCounters[evenConstant];

@@ -331,8 +331,6 @@ public class MorraGameLogic {
 
     System.out.println("Thanks for playing!");
 
-    // All the history elements of the game should be coded using Arrays.
-
     System.out.println("Player rounds won: " + human.getRoundsWonCount());
     System.out.println("Player rounds lost: " + human.getRoundsLostCount());
 
