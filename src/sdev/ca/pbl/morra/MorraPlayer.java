@@ -10,7 +10,17 @@ public class MorraPlayer {
   private int fingers = 0;
   private int score = 0;
   private int[] fingerHistory = new int[1];
-  private int roundsWon = 0;
+
+  private int[] roundsWonLostCounters = new int[2];
+  private int wonConstant = 0;
+  private int lostConstant = 1;
+
+  private int[] evensOddsCounters = new int[2];
+  private int evenConstant = 0;
+  private int oddConstant = 1;
+
+  private int[] extraPointsCounter = new int[1];
+  private int extraPointsConstant = 0;
 
   /**
    * Default constructor for MorraPlayer.
@@ -42,6 +52,12 @@ public class MorraPlayer {
    */
   public void setFingers(int fingers) {
     this.fingers = fingers;
+
+    if (fingers % 2 == 0) {
+      this.updateEvenNumberCount();
+    } else if (fingers % 2 == 1) {
+      this.updateOddNumberCount();
+    }
   }
 
   /**
@@ -51,6 +67,7 @@ public class MorraPlayer {
    */
   public void roundWinnerPointsUpdate() {
     this.score += 2;
+    this.updateWonRoundCount();
   }
 
   /**
@@ -59,7 +76,11 @@ public class MorraPlayer {
    * @author johnfrazer - x16138015
    */
   public void closerToTheSumBonusPointUpdate() {
+    // Increment the player score to award the bonus point.
     this.score++;
+
+    // Increment the record of bonus points won.
+    this.extraPointsCounter[extraPointsConstant]++;
   }
 
   /**
@@ -162,8 +183,8 @@ public class MorraPlayer {
    * 
    * @author johnfrazer - x16138015
    */
-  public void wonRound() {
-    this.roundsWon++;
+  public void updateWonRoundCount() {
+    this.roundsWonLostCounters[wonConstant]++;
   }
 
   /**
@@ -174,6 +195,95 @@ public class MorraPlayer {
    * @author johnfrazer - x16138015
    */
   public int getRoundsWonCount() {
-    return this.roundsWon;
+    return this.roundsWonLostCounters[wonConstant];
+  }
+
+  /**
+   * Increase the player's number of rounds lost counter.
+   * 
+   * @author johnfrazer - x16138015
+   */
+  public void updateLostRoundCount() {
+    this.roundsWonLostCounters[lostConstant]++;
+  }
+
+  /**
+   * Read the number of rounds the player has lost.
+   * 
+   * @return The current number of rounds the player has lost in this game.
+   * 
+   * @author johnfrazer - x16138015
+   */
+  public int getRoundsLostCount() {
+    return this.roundsWonLostCounters[lostConstant];
+  }
+
+  /**
+   * TODO
+   * 
+   * @author johnfrazer - x16138015
+   */
+  public void evenNumberShown() {
+    this.evensOddsCounters[evenConstant]++;
+  }
+
+  /**
+   * TODO
+   * 
+   * @author johnfrazer - x16138015
+   */
+  public void oddNumberShown() {
+    this.evensOddsCounters[oddConstant]++;
+  }
+
+  /**
+   * TODO
+   * 
+   * @return
+   */
+  public void updateEvenNumberCount() {
+    this.evensOddsCounters[evenConstant]++;
+  }
+
+  /**
+   * TODO
+   * 
+   * @return
+   */
+  public int getEvenNumberCount() {
+    return this.evensOddsCounters[evenConstant];
+  }
+
+  /**
+   * TODO
+   * 
+   * @return
+   * 
+   * @author johnfrazer - x16138015
+   */
+  public void updateOddNumberCount() {
+    this.evensOddsCounters[oddConstant]++;
+  }
+
+  /**
+   * TODO
+   * 
+   * @return
+   * 
+   * @author johnfrazer - x16138015
+   */
+  public int getOddNumberCount() {
+    return this.evensOddsCounters[oddConstant];
+  }
+
+  /**
+   * TODO
+   * 
+   * @return
+   * 
+   * @author johnfrazer - x16138015
+   */
+  public int getExtraPointsWon() {
+    return this.extraPointsCounter[extraPointsConstant];
   }
 }

@@ -168,6 +168,7 @@ public class MorraGameLogic {
         System.out.println("You win this round! (" + totalFingersShown + " is even)");
       } else if (!cpu.isPlayerOdds()) {
         cpu.roundWinnerPointsUpdate();
+        human.updateLostRoundCount();
         System.out.println("CPU wins this round! (" + totalFingersShown + " is even)");
       }
     } else if (totalFingersShown % 2 == 1) {
@@ -177,6 +178,7 @@ public class MorraGameLogic {
         System.out.println("You win this round! (" + totalFingersShown + " is odd)");
       } else if (cpu.isPlayerOdds()) {
         cpu.roundWinnerPointsUpdate();
+        human.updateLostRoundCount();
         System.out.println("CPU wins this round! (" + totalFingersShown + " is odd)");
       }
     }
@@ -325,10 +327,20 @@ public class MorraGameLogic {
    * 
    * @author johnfrazer - x16138015
    */
-  public void displayGameEndStats() {
+  public void displayGameEndStats(MorraPlayer human, MorraCPUPlayer cpu) {
+
+    System.out.println("Thanks for playing!");
 
     // All the history elements of the game should be coded using Arrays.
-    // TODO
+
+    System.out.println("Player rounds won: " + human.getRoundsWonCount());
+    System.out.println("Player rounds lost: " + human.getRoundsLostCount());
+
+    System.out.println("Number of evens fingers: " + human.getEvenNumberCount());
+    System.out.println("Number of odd fingers: " + human.getOddNumberCount());
+
+    System.out.println("Bonus points won: " + human.getExtraPointsWon());
+
   }
 
 }

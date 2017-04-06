@@ -39,14 +39,14 @@ public class MorraApp {
     // another game.
     boolean playAgain = true;
 
+    // Prompt user if they wish to be Odds or Evens.
+    boolean humanSelectedOdds = morraLogic.humanPlayerTypeSelectionMenu(keyboardIn);
+
+    // Set the player and cpu types based on the user selection.
+    morraLogic.setPlayerTypes(human, cpu, humanSelectedOdds);
+
     do {
       /* PLAY GAME */
-      // Prompt user if they wish to be Odds or Evens.
-      boolean humanSelectedOdds = morraLogic.humanPlayerTypeSelectionMenu(keyboardIn);
-
-      // Set the player and cpu types based on the user selection.
-      morraLogic.setPlayerTypes(human, cpu, humanSelectedOdds);
-
       int roundCounter = 0;
 
       do {
@@ -90,7 +90,7 @@ public class MorraApp {
     } while (playAgain);
 
     // At the end of all games, display a history of games played.
-    morraLogic.displayGameEndStats();
+    morraLogic.displayGameEndStats(human, cpu);
 
     // Close the scanner object.
     keyboardIn.close();
