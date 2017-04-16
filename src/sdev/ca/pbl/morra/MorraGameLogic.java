@@ -336,8 +336,11 @@ public class MorraGameLogic {
     System.out.println("Player rounds won: " + human.getRoundsWonCount());
     System.out.println("Player rounds lost: " + human.getRoundsLostCount());
 
-    System.out.println("Number of evens fingers: " + human.getEvenNumberCount());
-    System.out.println("Number of odd fingers: " + human.getOddNumberCount());
+    System.out.println("Number of Player evens fingers: " + human.getEvenNumberCount());
+    System.out.println("Number of Player odd fingers: " + human.getOddNumberCount());
+
+    System.out.println("Number of CPU evens fingers: " + cpu.getEvenNumberCount());
+    System.out.println("Number of CPU odd fingers: " + cpu.getOddNumberCount());
 
     System.out.println("Bonus points won: " + human.getExtraPointsWon());
 
